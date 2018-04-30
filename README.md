@@ -18,7 +18,7 @@ The instruction pipeline is way of bringing the concept of single-core CPU paral
 
 Now before diving down inside of the code I want you to look at this CMSIS standard for implementing ARM Cortex M4 instruction set.  
 
-Intrinsic Functions for SIMD Instructions [only Cortex-M4 and Cortex-M7] (http://arm-software.github.io/CMSIS_5/Core/html/group__intrinsic__SIMD__gr.html)  
+Intrinsic Functions for SIMD Instructions ![only Cortex-M4 and Cortex-M7] (http://arm-software.github.io/CMSIS_5/Core/html/group__intrinsic__SIMD__gr.html)  
 Now look at the very simple code:
 ```
  for(uint32_t  i = 0 ; i < 1024 ; i++){
@@ -63,53 +63,3 @@ The SIMD version of the above code uses the instruction __UADD16 (http://arm-sof
   ```
   
 More tips on SIMD : ARM Cortex M4/M7 Advanced Tips 2 - SIMD instruc... (https://community.st.com/videos/1043-arm-cortex-m4m7-advanced-tips-2-simd-instructions)
-The full-code on stm32f4xx series microcontroller is as follows:
-
-```
-   #include "stm32f4xx_conf.h"
-
-    #include <cstdint>
-
-    int main(void)
-    {
-        uint16_t  A2[1024],A3[1024],B[1024],C[1024];
-        uint32_t *B1 = (uint32_t*)B;
-        uint32_t *C1 = (uint32_t*)C;
-		uint32_t *A31 = (uint32_t*)A3;
-
-        for(uint32_t  i = 0 ; i < 1024 ; i=i+4){
-
-            B[i] = 1;
-            B[i + 1] = 1;
-            B[i + 2] = 1;
-            B[i+ 3] = 1;
-        }
-
-        for(uint32_t  i = 0 ; i < 1024 ; i=i+4){
-
-               C[i] = 1;
-            C[i + 1] = 1;
-            C[i + 2] = 1;
-            C[i + 3] = 1;
-        }
-
-        //Optimization - with SIMD
-
-     // Fast SIMD
-   for (uint32_t  i =0 ; i < 1024/2; i++){
-
-                A31[i] = __UQADD16 (B1[i] , C1[i]);
-
-
-     }
-        //Optimization - without SIMD
-        for(uint32_t  i = 0 ; i < 1024 ; i = i+4){
-
-            A2[i] = B[i] + C[i];
-            A2[i + 1] = B[i + 1] + C[i + 1];
-            A2[i + 2] = B[i + 2] + C[i + 2];
-            A2[i + 3] = B[i + 3] + C[i + 3];
-
-        }
-    }
-  ```
