@@ -1,5 +1,5 @@
 # stm32f4xxx-SIMD-add
-This is a demostration of SIMD code in stm32f4xxx microcontroller. This repository was based on my answer on Quora : [Rohan Verma's answer](http://qr.ae/TUT1OT)
+This is a demostration of SIMD code in stm32f4xxx microcontroller.
 
 Now I’m fan of the **pair-programming** style of coding the solution because it lets you know the efficiency of your counterpart better. So lets devise this solution together, lets start with some information about** SIMD programming **in ARM microcontroller.  
 **What is SIMD?**
