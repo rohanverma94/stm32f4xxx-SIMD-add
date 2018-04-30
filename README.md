@@ -24,7 +24,7 @@ Now look at the very simple code:
 
 If you compile this code under** arm-gcc-none-eabi cross-compiler**, the instruction pipeline would take care of machine code produced.
 And as per my knowledge, the gcc is always a smart-ass and will automatically do any kind of loop unrolling if required, but given that target is embedded device, so gcc cross-compiler would have no liberty to act like a smart-ass as it were to do normally.
-So optimized version ( loop unrolling) on a** pipelined CPU( without SIMD):**
+So optimized version ( loop unrolling) on a** pipelined CPU( without SIMD):**  
 ```
 //Optimization - without SIMD
     for(uint32_t  i = 0 ; i < 1024 ; i = i+4){
@@ -55,9 +55,11 @@ The SIMD version of the above code uses the instruction __UADD16 (http://arm-sof
 
 
      }
-     ```
+  ```
+  
 More tips on SIMD : ARM Cortex M4/M7 Advanced Tips 2 - SIMD instruc... (https://community.st.com/videos/1043-arm-cortex-m4m7-advanced-tips-2-simd-instructions)
 The full-code on stm32f4xx series microcontroller is as follows:
+
 ```
    #include "stm32f4xx_conf.h"
 
