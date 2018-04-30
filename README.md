@@ -43,7 +43,7 @@ So optimized version ( loop unrolling) on a **pipelined CPU( without SIMD):**
 ```
 The question in above code , **why the loop is unrolled by factor of 4 ?**
 Answer is **CPU loves the power of duo or power of 2.**
-The SIMD version of the above code uses the instruction __U@ADD16 (http://arm-software.github.io/CMSIS_5/Core/html/group__intrinsic__SIMD__gr.html#ga9e2cc5117e79578a08b25f1e89022966) , which performs two 16-bit unsigned integer additions in parallel. Remember that SIMD unit in CPU can’t perform 32-bit unsigned addition, because this is how the SIMD unit in ARM Cortex M4 is designed.
+The SIMD version of the above code uses the instruction __UQADD16 (http://arm-software.github.io/CMSIS_5/Core/html/group__intrinsic__SIMD__gr.html#ga9e2cc5117e79578a08b25f1e89022966) , which performs two 16-bit unsigned integer additions in parallel. Remember that SIMD unit in CPU can’t perform 32-bit unsigned addition, because this is how the SIMD unit in ARM Cortex M4 is designed.
 **The SIMD code equivalent on Cortex M4 CPU:**
 
 ```
